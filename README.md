@@ -29,6 +29,22 @@ open_cv/
 ├── emotion_model.h5
 ├── sample.mp4
 └── video_processing-checkpoint.ipynb
+#IF YOU WANT TO SAVE SOMETIME THEN TRY TO SAVE THE BEST MODEL(ALTHOUGH FOR THIS PROJECT THIS IS OPTIONAL)
+ Save the best model during training to avoid overfitting:
+python
+Copy
+Edit
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+
+checkpoint = ModelCheckpoint('best_emotion_model.h5', monitor='val_accuracy', save_best_only=True, mode='max')
+early_stopping = EarlyStopping(monitor='val_accuracy', patience=5, mode='max')
+
+model.fit(
+    train_generator,
+    epochs=50,
+    validation_data=validation_generator,
+    callbacks=[checkpoint, early_stopping]
+)
 🎉 Results
 The program will display real-time emotion detection on video frames and print the sentiment summary at the end.
 💡 Technologies Used
