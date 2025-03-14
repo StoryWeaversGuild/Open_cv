@@ -3,7 +3,6 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 
-# Data Generators for Training and Validation
 train_datagen = ImageDataGenerator(rescale=1./255)
 validation_datagen = ImageDataGenerator(rescale=1./255)
 
@@ -23,7 +22,6 @@ validation_generator = validation_datagen.flow_from_directory(
     class_mode='categorical'
 )
 
-# Building the CNN Model
 model = Sequential([
     Conv2D(64, (3, 3), activation='relu', input_shape=(48, 48, 1)),
     MaxPooling2D((2, 2)),
@@ -42,13 +40,11 @@ model = Sequential([
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Model Training
 model.fit(
     train_generator,
     epochs=50,
     validation_data=validation_generator
 )
 
-# Save the Trained Model
 model.save('emotion_model.h5')
 print("Model trained and saved successfully!")
