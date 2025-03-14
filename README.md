@@ -36,4 +36,3 @@ Python
 OpenCV
 TensorFlow/Keras
 NumPy
-📧 Contributi
